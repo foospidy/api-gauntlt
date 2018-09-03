@@ -1,0 +1,47 @@
+Feature: Run sslyze against a target
+
+Background:
+  Given "sslyze" is installed
+  And the following profile:
+    | name     | value      |
+    | hostname | [HOSTNAME] |
+
+Scenario: Ensure no anonymous certificates
+  When I launch an "sslyze" attack with:
+    """
+    python <sslyze_path> <hostname>:443
+    """
+  Then the output should not contain:
+    """
+    Anon
+    """
+
+Scenario: Ensure no sslv1 cipher suites are accepted
+  When I launch an "sslyze" attack with:
+    """
+    python <sslyze_path> --sslv1 <hostname>:443
+    """
+  Then the output should not contain:
+    """
+    Accepted:
+    """
+
+Scenario: Ensure no sslv2 cipher suites are accepted
+  When I launch an "sslyze" attack with:
+    """
+    python <sslyze_path> --sslv2 <hostname>:443
+    """
+  Then the output should not contain:
+    """
+    Accepted:
+    """
+
+Scenario: Ensure no tlsv1 cipher suites are accepted
+  When I launch an "sslyze" attack with:
+    """
+    python <sslyze_path> --tlsv1 <hostname>:443
+    """
+  Then the output should not contain:
+    """
+    Accepted:
+    """
