@@ -57,10 +57,9 @@ class Senarios():
             self.scenario = f.read()
 
         self.EXAMPLES = '    | method | path | response |\n'
-        verbs = ['DELETE', 'PATCH', 'TRACE', 'TRACK', 'BOGUS', 'GET', 'POST']
 
         for request in self.API['requests']:
-            for verb in verbs:
+            for verb in self.http_methods:
                 if verb != request['method']:
                     self.EXAMPLES += '    | {} | {} | 501 Not Implemented |\n'.format(verb, request['url'])
 
@@ -80,10 +79,9 @@ class Senarios():
             self.scenario = f.read()
 
         self.EXAMPLES = '    | method | url |\n'
-        verbs = ['OPTIONS', 'HEAD', 'PUT', 'DELETE', 'PATCH', 'TRACE', 'TRACK', 'BOGUS', 'GET', 'POST']
 
         for request in self.API['requests']:
-            for verb in verbs:
+            for verb in self.http_methods:
                 self.EXAMPLES += '    | {} | {} |\n'.format(verb, request['url'])
 
         self.scenario = self.scenario.replace('[EXAMPLES]', self.EXAMPLES)
