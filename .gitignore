@@ -1,5 +1,6 @@
-input/
-scenarios/
+input/*.json
+input/*.raml
+scenarios/*.attack
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

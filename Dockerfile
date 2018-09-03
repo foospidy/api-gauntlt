@@ -7,6 +7,5 @@ RUN apt-get update && \
 
 RUN npm install --save api-spec-transformer
 
-
 COPY contrib/convert.sh /convert.sh
 COPY contrib/raml2oas.js /raml2oas.js
